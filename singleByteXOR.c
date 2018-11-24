@@ -34,26 +34,17 @@ int main(){
 		strncpy(messageInAscii+i,&c,1);
 		free(byte);
 	}
-	messageInAscii[numberOfBytesInMessage];
-	int maxIndex = 0;
-	int maxScore = 0;
-	for(int i=0;i<128;i++){
-		if(scores[i]>maxScore) {
-			maxIndex = i;
-			maxScore = scores[i];
+	messageInAscii[numberOfBytesInMessage] = '\0';
+	for(int i=0;i<128;i++) {
+		char* deciphered = (char*) malloc(numberOfBytesInMessage+1);
+		for(int j=0;j<numberOfBytesInMessage;j++) {
+			int c = (int) messageInAscii[j];
+			int newC = c^i;
+			deciphered[j] =(char) newC ;
 		}
+		deciphered[numberOfBytesInMessage] = '\0';
+		printf("%c : %s\n",i,deciphered);
+		free(deciphered);
 	}
-	int key1 = maxIndex^69;
-	int key2 = maxIndex^101;
-	printf("Keys: %c, %c",key1,key2);
-	char decrypt1[numberOfBytesInMessage];
-	char decrypt2[numberOfBytesInMessage];
-	for(int i=0;i<numberOfBytesInMessage;i++) {
-		decrypt1[i] = messageInAscii[i]^key1;
-		decrypt2[i] = messageInAscii[i]^key2;
-	}
-	decrypt1[numberOfBytesInMessage] = '\0';
-	decrypt2[numberOfBytesInMessage] = '\0';
-	printf("$s\n%s\n",decrypt1,decrypt2);
 }
 
