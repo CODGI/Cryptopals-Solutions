@@ -18,10 +18,6 @@ int main(){
 			strncpy(messageBin+4*i,binaryDigits+shift,4);
 		}
 	}
-	unsigned int scores[128];
-	for(int i=0;i<128;i++) {
-		scores[i] = 0;
-	}
 	int numberOfBytesInMessage = messageLength/2;
 	char messageInAscii[numberOfBytesInMessage];
 	for(int i=0;i<numberOfBytesInMessage;i++) {
@@ -30,7 +26,6 @@ int main(){
 		byte[8] = '\0';
 		char* pEnd;
 		char c = strtol(byte,&pEnd,2);
-		scores[(int) c] ++;
 		strncpy(messageInAscii+i,&c,1);
 		free(byte);
 	}
